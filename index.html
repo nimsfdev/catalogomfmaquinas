@@ -613,13 +613,7 @@
       const c = p.cat || "Diversos e Acessórios";
       contagem[c] = (contagem[c] || 0) + 1;
     });
-
-    const todasCategorias = ["TODAS"];
-    if (contagem["COM_FOTO"] > 0) todasCategorias.push("COM_FOTO");
-    Object.keys(ICONES_CATEGORIAS).forEach(c => {
-      if (c !== "TODAS" && c !== "COM_FOTO") todasCategorias.push(c);
-    });
-
+    
     container.innerHTML = todasCategorias.map(cat => {
       const label = ICONES_CATEGORIAS[cat] || cat;
       const count = contagem[cat] || 0;
@@ -728,11 +722,6 @@
     const inputFiltro = document.getElementById("filtro");
     const termo = inputFiltro ? inputFiltro.value.toLowerCase().trim() : "";
 
-    listaFiltrada = catalogoAtivo.filter(p => {
-      if (categoriaAtiva === "COM_FOTO") {
-        if (!p.img || p.img.trim() === "") return false;
-      } else if (categoriaAtiva !== "TODAS" && p.cat !== categoriaAtiva) {
-        return false;
       }
       if (termo) {
         const termos = termo.split(' ').filter(t => t.length > 0);
@@ -837,6 +826,7 @@
     msg += `------------------------------------\n`;
     msg += `*Cliente:* ${cliente}\n`;
     if (local) msg += `*Local/Entrega:* ${local}\n`;
+    if (local) msg += `*cidade/bairro:* ${local}\
     if (obs) msg += `*Observações:* ${obs}\n`;
     msg += `------------------------------------\n`;
     msg += `*ITENS SOLICITADOS:*\n\n`;
