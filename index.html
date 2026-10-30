@@ -718,14 +718,20 @@
     }, 120);
   }
 
-  function executarFiltro() {
+ function executarFiltro() {
     const inputFiltro = document.getElementById("filtro");
     const termo = inputFiltro ? inputFiltro.value.toLowerCase().trim() : "";
 
+    listaFiltrada = catalogoAtivo.filter(p => {
+      if (categoriaAtiva === "COM_FOTO" && (!p.img || p.img.trim() === "")) {
+        return false;
+      }
+      if (categoriaAtiva !== "TODAS" && categoriaAtiva !== "COM_FOTO" && p.cat !== categoriaAtiva) {
+        return false;
       }
       if (termo) {
         const termos = termo.split(' ').filter(t => t.length > 0);
-        const texto = `${p.desc} ${p.ref} ${p.cat}`.toLowerCase();
+        const texto = `${p.desc || ""} ${p.ref || ""} ${p.cat || ""}`.toLowerCase();
         return termos.every(t => texto.includes(t));
       }
       return true;
@@ -743,7 +749,6 @@
 
     renderizarCatalogo();
   }
-
   function adicionarAoPedidoPorId(id) {
     const prod = catalogoAtivo.find(p => p.id === id);
     if (!prod) return;
