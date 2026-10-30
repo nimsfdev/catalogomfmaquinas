@@ -613,13 +613,15 @@
       const c = p.cat || "Diversos e Acessórios";
       contagem[c] = (contagem[c] || 0) + 1;
     });
-    
+    const todasCategorias = Object.keys(ICONES_CATEGORIAS);
+
     container.innerHTML = todasCategorias.map(cat => {
       const label = ICONES_CATEGORIAS[cat] || cat;
       const count = contagem[cat] || 0;
       const classeAtiva = cat === categoriaAtiva ? "ativo" : "";
       return `<button class="btn-cat ${classeAtiva}" onclick="selecionarCategoria('${cat}', event)">${label} (${count})</button>`;
     }).join("");
+  }
   }
 
   function selecionarCategoria(cat, ev) {
