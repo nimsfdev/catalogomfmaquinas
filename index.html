@@ -624,8 +624,7 @@
       return `<button class="btn-cat ${classeAtiva}" onclick="selecionarCategoria('${cat}', event)">${label} (${count})</button>`;
     }).join("");
   }
-  }
-
+  
   function selecionarCategoria(cat, ev) {
     categoriaAtiva = cat;
     document.querySelectorAll(".btn-cat").forEach(btn => btn.classList.remove("ativo"));
