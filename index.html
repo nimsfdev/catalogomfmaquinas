@@ -620,8 +620,7 @@
       const count = contagem[cat] || 0;
       const classeAtiva = cat === categoriaAtiva ? "ativo" : "";
       return `<button class="btn-cat ${classeAtiva}" onclick="selecionarCategoria('${cat}', event)">${label} (${count})</button>`;
-    }).join("");
-  }
+       }).join("");
   }
 
   function selecionarCategoria(cat, ev) {
